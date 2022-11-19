@@ -1,40 +1,21 @@
-//selector
-const output = document.querySelector(".output");
-const result = document.querySelector(".result");
-const keys = document.querySelectorAll("button");
+let outputScreen=document.getElementById("output_screen");
 
-//eventlistener
-keys.forEach(key=>{
-    key.addEventListener("click",calculate);
-});
-
+function display(num)
+{
+    outputScreen.value+=num;
+}
 function calculate(){
-    let buttonText = this.innerText;
-    if(buttonText==="AC"){
-        output.innerText = "";
-        result.innerText = "0";
-        result.style.animation = "";
-        output.style.animation = "";
-        return;
+    try{
+        outputScreen.value=eval(outputScreen.value);
     }
-
-    if(buttonText === "DEL"){
-        output.textContent = output.textContent.substr(0,output.textContent.length-1);
-        return;
+    catch(err)
+    {
+        alert("INVALID ENTRY")
     }
-
-    if(buttonText === "="){
-        result.innerText = eval(output.innerText);
-        result.style.animation = "big 0.5s ease-in-out";
-        output.style.animation = "small 0.5s ease-in-out";
-        result.style.animationFillMode = "forwards";
-        output.style.animationFillMode = "forwards";
-    }
-
-    else{
-        output.textContent += buttonText;
-        return;
-    }
-
-  
+}
+function Clear(){
+    outputScreen.value ="";
+}
+function del(){
+    outputScreen.value=outputScreen.value.slice(0,-1);
 }
